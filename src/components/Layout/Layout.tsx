@@ -12,15 +12,17 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div
-      className={`bg-white flex flex-col font-sans ${
-        isHome ? "min-h-screen" : "h-screen overflow-hidden"
+      className={`flex flex-col font-sans ${
+        isHome
+          ? "min-h-screen bg-[#F4F7FB]"
+          : "h-screen overflow-hidden bg-white"
       }`}
     >
       <Header />
       <main
         className={`flex-1 w-full ${
           isHome
-            ? "max-w-7xl mx-auto pt-[60px] px-4 md:px-8 pb-12"
+            ? "pt-[60px]" // Let Home component handle constraints
             : "pt-[60px] h-full"
         }`}
       >

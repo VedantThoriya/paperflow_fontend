@@ -9,7 +9,10 @@ const ENDPOINTS = {
   MERGE: "/merge",
   SPLIT: "/split",
   COMPRESS: "/compress",
+  PROTECT: "/protect",
+  UNLOCK: "/unlock",
   UPLOAD_TEMP: "/uploads/temp",
+  CHECK_ENCRYPTION: "/check-encryption",
   JOB_STATUS: (id: string) => `/${id}`,
 };
 
@@ -70,11 +73,23 @@ export const api = {
     });
   },
 
+  startProtectJob: async (files: string[], password: string) => {
+    return axiosInstance.post<{
+      jobId: string;
+      status: string;
+      message: string;
+    }>(ENDPOINTS.PROTECT, {
+      files,
+      password,
+    });
+  },
+
   getJobStatus: async (jobId: string) => {
     return axiosInstance.get<{
       id: string;
       status: "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED";
       createdAt: string;
+      isCredentialIssue?: boolean;
       type: string;
       result?: {
         url: string;
@@ -83,5 +98,25 @@ export const api = {
       };
       completedAt?: string;
     }>(ENDPOINTS.JOB_STATUS(jobId));
+  },
+
+  checkPDFEncryption: async (files: string[]) => {
+    return axiosInstance.post<{
+      isEncrypted: boolean;
+      fileId: string;
+    }>(ENDPOINTS.CHECK_ENCRYPTION, {
+      files,
+    });
+  },
+
+  startUnlockJob: async (files: string[], password: string) => {
+    return axiosInstance.post<{
+      jobId: string;
+      status: string;
+      message: string;
+    }>(ENDPOINTS.UNLOCK, {
+      files,
+      password,
+    });
   },
 };

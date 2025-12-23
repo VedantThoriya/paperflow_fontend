@@ -7,6 +7,7 @@ import {
   Linkedin,
   Files,
   Scissors,
+  ChevronRight,
 } from "lucide-react";
 import {
   Link,
@@ -75,18 +76,33 @@ export const DownloadPage = () => {
     switch (toolType) {
       case "compress":
         return {
-          title: "PDF has been compressed!",
-          button: "Download compressed PDF",
+          title: "PDF files have been compressed!",
+          buttonText: "Download compressed PDFs",
         };
       case "split":
         return {
           title: "PDFs have been split!",
-          button: "Download split PDF",
+          buttonText: "Download split PDF",
+        };
+      case "protect":
+        return {
+          title: "PDF file has been protected!",
+          buttonText: "Download protected PDF",
+        };
+      case "unlock":
+        return {
+          title: "PDF has been unlocked!",
+          buttonText: "Download unlocked PDF",
+        };
+      case "merge":
+        return {
+          title: "PDF files have been merged!",
+          buttonText: "Download merged PDFs",
         };
       default:
         return {
-          title: "PDFs have been merged!",
-          button: "Download merged PDF",
+          title: "PDF files have been processed!",
+          buttonText: "Download processed PDFs",
         };
     }
   };
@@ -134,7 +150,7 @@ export const DownloadPage = () => {
           className="flex items-center gap-3 bg-[#E5322D] hover:bg-[#d4201b] text-white text-xl font-bold py-6 px-12 rounded-lg shadow-md"
         >
           <Download size={28} />
-          {text.button}
+          {text.buttonText}
         </button>
 
         <button
@@ -204,34 +220,37 @@ export const DownloadPage = () => {
           <Link
             to="/compress"
             replace
-            className="flex gap-4 p-4 rounded-lg hover:bg-gray-50"
+            className="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50"
           >
             <div className="w-10 h-10 bg-green-50 text-green-500 flex items-center justify-center rounded-lg">
               <Files />
             </div>
             <span className="font-semibold">Compress PDF</span>
+            <ChevronRight className="ml-auto text-gray-400" />
           </Link>
 
           <Link
             to="/split"
             replace
-            className="flex gap-4 p-4 rounded-lg hover:bg-gray-50"
+            className="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50"
           >
             <div className="w-10 h-10 bg-orange-50 text-orange-500 flex items-center justify-center rounded-lg">
               <Scissors />
             </div>
             <span className="font-semibold">Split PDF</span>
+            <ChevronRight className="ml-auto text-gray-400" />
           </Link>
 
           <Link
             to="/merge"
             replace
-            className="flex gap-4 p-4 rounded-lg hover:bg-gray-50"
+            className="flex items-center gap-4 p-4 rounded-lg hover:bg-gray-50"
           >
             <div className="w-10 h-10 bg-red-50 text-red-500 flex items-center justify-center rounded-lg">
               <Files />
             </div>
             <span className="font-semibold">Merge PDF</span>
+            <ChevronRight className="ml-auto text-gray-400" />
           </Link>
         </div>
       </div>

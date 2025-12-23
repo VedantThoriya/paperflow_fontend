@@ -10,6 +10,7 @@ interface WorkspaceLayoutProps {
   sidebarContent: ReactNode;
   actionButton: ReactNode;
   mainContent?: ReactNode;
+  showAddMore?: boolean;
 }
 
 export const WorkspaceLayout = ({
@@ -18,6 +19,7 @@ export const WorkspaceLayout = ({
   sidebarContent,
   actionButton,
   mainContent,
+  showAddMore = true,
 }: WorkspaceLayoutProps) => {
   const { files, reset } = useJobStore();
   const hasFiles = files.length > 0;
@@ -61,6 +63,7 @@ export const WorkspaceLayout = ({
                 enableDnD={
                   title.toLowerCase().includes("merge") || files.length > 1
                 }
+                showAddMore={showAddMore}
               />
             )}
           </div>

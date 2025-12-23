@@ -13,6 +13,7 @@ export const UploadingPage = () => {
   const [progress, setProgress] = useState(0); // 0-100
   const [speed, setSpeed] = useState(0); // MB/s
   const [timeLeft, setTimeLeft] = useState(0); // seconds
+  const [statusText, setStatusText] = useState("UPLOADED");
 
   const lastLoadedRef = useRef(0);
   const lastTimeRef = useRef(Date.now());
@@ -85,14 +86,52 @@ export const UploadingPage = () => {
       const elapsed = Date.now() - startTimeRef.current;
       const remainingTime = Math.max(MIN_UPLOAD_SCREEN_TIME - elapsed, 0);
 
-      setTimeout(() => {
-        navigate("/processing", {
-          state: {
-            fileIds: tempFileIdsRef.current,
-            ...location.state,
-          },
-          replace: true,
-        });
+      setTimeout(async () => {
+        if (location.state?.tool === "unlock") {
+          setStatusText("CHECKING ENCRYPTION...");
+          try {
+            const response = await api.checkPDFEncryption(
+              tempFileIdsRef.current
+            );
+            if (response.data.isEncrypted) {
+              navigate("/unlock/password", {
+                state: {
+                  fileIds: tempFileIdsRef.current,
+                  ...location.state,
+                },
+                replace: true,
+              });
+            } else {
+              navigate("/processing", {
+                state: {
+                  fileIds: tempFileIdsRef.current,
+                  jobType: "unlock",
+                  ...location.state,
+                },
+                replace: true,
+              });
+            }
+          } catch (error) {
+            console.error("Encryption check failed", error);
+            // Fallback or error handling? For now proceed to processing or show error
+            navigate("/processing", {
+              state: {
+                fileIds: tempFileIdsRef.current,
+                jobType: "unlock",
+                ...location.state,
+              },
+              replace: true,
+            });
+          }
+        } else {
+          navigate("/processing", {
+            state: {
+              fileIds: tempFileIdsRef.current,
+              ...location.state,
+            },
+            replace: true,
+          });
+        }
       }, remainingTime);
     };
 
@@ -148,7 +187,7 @@ export const UploadingPage = () => {
             {progress}%
           </h1>
           <p className="text-[#383E45] font-medium text-sm tracking-[0.2em] uppercase mb-12">
-            UPLOADED
+            {statusText}
           </p>
         </div>
       </div>

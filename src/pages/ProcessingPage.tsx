@@ -9,7 +9,6 @@ export const ProcessingPage = () => {
   const processedRef = useRef(false);
 
   // Manual back button handling removed
-
   useEffect(() => {
     const fileIds = location.state?.fileIds;
     if (!fileIds || fileIds.length === 0) {
@@ -52,6 +51,18 @@ export const ProcessingPage = () => {
                 : undefined,
           };
           startResponse = await api.startSplitJob(fileIds, apiOptions);
+        } else if (jobType === "protect") {
+          setJobStatus("Protecting PDF...");
+          startResponse = await api.startProtectJob(
+            fileIds,
+            location.state?.password
+          );
+        } else if (jobType === "unlock") {
+          setJobStatus("Unlocking PDF...");
+          startResponse = await api.startUnlockJob(
+            fileIds,
+            location.state?.password
+          );
         } else {
           setJobStatus("Merging PDFs...");
           startResponse = await api.startMergeJob(fileIds);
@@ -81,7 +92,20 @@ export const ProcessingPage = () => {
               });
             } else if (status === "FAILED") {
               clearInterval(interval);
-              setJobStatus("Job Failed.");
+              if (statusResponse.data.isCredentialIssue) {
+                // Redirect back to password page
+                navigate("/unlock/password", {
+                  state: {
+                    fileIds: fileIds,
+                    // Maybe pass error message?
+                    error: "Incorrect password",
+                    tool: "unlock",
+                  },
+                  replace: true,
+                });
+              } else {
+                setJobStatus("Job Failed.");
+              }
             }
           } catch (pollError) {
             console.error("Polling error", pollError);

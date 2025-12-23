@@ -3,6 +3,9 @@ import { Layout } from "@/components/Layout/Layout";
 import { MergePdf } from "@/pages/MergePdf";
 import { SplitPdf } from "@/pages/SplitPdf";
 import { CompressPdf } from "@/pages/CompressPdf";
+import { ProtectPdf } from "@/pages/ProtectPdf";
+import { UnlockPdf } from "@/pages/UnlockPdf";
+import { UnlockPassword } from "@/pages/UnlockPassword";
 import { Home } from "@/pages/Home";
 import { DownloadPage } from "@/pages/DownloadPage";
 import { ProcessingPage } from "@/pages/ProcessingPage";
@@ -23,6 +26,9 @@ function App() {
                 <Route path="/merge" element={<MergePdf />} />
                 <Route path="/split" element={<SplitPdf />} />
                 <Route path="/compress" element={<CompressPdf />} />
+                <Route path="/protect" element={<ProtectPdf />} />
+                <Route path="/unlock" element={<UnlockPdf />} />
+                <Route path="/unlock/password" element={<UnlockPassword />} />
                 <Route path="/download" element={<DownloadPage />} />
               </Routes>
             </Layout>
