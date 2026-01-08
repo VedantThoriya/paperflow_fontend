@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# PaperFlow - Advanced PDF Tool Suite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**PaperFlow** is a powerful, free, and open-source web application that provides a comprehensive suite of PDF tools. Whether you need to merge, split, compress, protect, or unlock PDF documents, PaperFlow handles it all with ease and security, right in your browser.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend (Vercel):** [Vercel](https://paperflow-react.vercel.app)
 
-## React Compiler
+## 🔗 Related Repositories
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This is the frontend repository. For the backend application, please visit:
 
-## Expanding the ESLint configuration
+* **[PaperFlow Backend](https://github.com/VedantThoriya/paperflow_backend)**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+PaperFlow offers a wide range of PDF utilities:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **🔄 Merge PDF:** Combine multiple PDF files into a single document in your preferred order.
+- **✂️ Split PDF:** Separate one page or a whole set for easy conversion into independent PDF files.
+- **📉 Compress PDF:** Reduce file size while optimizing for maximal PDF quality.
+- **🔒 Protect PDF:** Encrypt your PDF files with a password to prevent unauthorized access.
+- **🔓 Unlock PDF:** Remove password security from PDFs, giving you the freedom to use your documents as you want.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Framework:** [React](https://react.dev/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Routing:** [React Router](https://reactrouter.com/)
+- **PDF Processing:** [pdfjs-dist](https://mozilla.github.io/pdf.js/)
+- **HTTP Client:** [Axios](https://axios-http.com/)
+- **State Management:** [Zustand](https://github.com/pmndrs/zustand)
+- **Drag & Drop:** [dnd-kit](https://dndkit.com/)
+
+### Backend
+
+- **Hosted on:** Render
+- **Language:** [Node.js](https://nodejs.org/) (Assumed based on typical stack, verify if different)
+
+## 📦 Installation & Setup
+
+Follow these steps to run the frontend locally:
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/VedantThoriya/paperflow_frontend.git
+    cd paperflow_frontend
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production:**
+    ```bash
+    npm run build
+    ```
+
+## 🏗️ Project Structure
+
+```
+src/
+├── api/             # API configuration and endpoints
+├── assets/          # Static assets (images, icons)
+├── components/      # Reusable UI components
+│   ├── Layout/      # Layout components (Header, Footer)
+│   └── Workspace/   # Workspace components (File uploader, Preview)
+├── pages/           # Application pages (Home, Merge, Split, etc.)
+├── store/           # Global state management (Zustand)
+├── utils/           # Helper functions (PDF utils)
+└── App.tsx          # Main application component
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🤝 Contributing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Contributions are always welcome! Please follow these steps:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  Fork the repository.
+2.  Create a new branch: `git checkout -b feature/your-feature-name`.
+3.  Make your changes and commit them: `git commit -m 'Add some feature'`.
+4.  Push to the branch: `git push origin feature/your-feature-name`.
+5.  Submit a pull request.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
