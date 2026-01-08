@@ -4,7 +4,7 @@
 
 ## 🚀 Live Demo
 
-- **Frontend (Vercel):** [Vercel](https://paperflow-react.vercel.app)
+- **Frontend (Vercel):** [Vercel](https://app-paperflow.vercel.app)
 
 ## 🔗 Related Repositories
 
